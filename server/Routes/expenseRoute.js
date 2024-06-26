@@ -8,7 +8,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 expRoute.get('/getExpense', authenticateToken, async (req, res) => {
-    const userId = req.user.userId
+    cc
     const response = await prisma.expense.findMany({
         where: { userId: userId }
     })
