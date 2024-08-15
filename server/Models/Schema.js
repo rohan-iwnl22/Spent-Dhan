@@ -12,6 +12,7 @@ const expenseSchema = z.object({
     description: z.string().min(1, "Description is required"),
     userId: z.number(),
     date: z.date(),
+    mode: z.string(),
 });
 
 const budgetSchema = z.object({

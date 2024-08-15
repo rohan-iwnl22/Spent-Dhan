@@ -29,6 +29,7 @@ model Expense {
   description String
   userId      Int
   date        DateTime
+  mode        String
 
   user Users @relation(fields: [userId], references: [id])
 }

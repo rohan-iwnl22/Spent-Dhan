@@ -17,7 +17,7 @@ expRoute.get('/getExpense', authenticateToken, async (req, res) => {
 })
 
 expRoute.post('/putExpense', authenticateToken, async (req, res) => {
-    let { amount, description, date } = req.body;
+    let { amount, description, date, mode } = req.body;
     const userId = req.user.userId;  // Extract userId from the authenticated user
 
     try {
@@ -27,15 +27,19 @@ expRoute.post('/putExpense', authenticateToken, async (req, res) => {
         }
         date = new Date(date);
 
+        if (mode !== "GPAY" && mode !== "CASH" && mode !== "GPay" && mode !== "Cash") {
+            res.status(400).json({ message: "payment mode can either be GPAY or CASH" })
+        }
         // Include userId in the validation
-        const validateExpense = expenseSchema.parse({ amount, description, date, userId });
+        const validateExpense = expenseSchema.parse({ amount, description, date, userId, mode });
 
         await prisma.expense.create({
             data: {
                 amount: validateExpense.amount,
                 description: validateExpense.description,
                 date: validateExpense.date,
-                userId: validateExpense.userId
+                userId: validateExpense.userId,
+                mode: validateExpense.mode
             }
         });
         res.status(200).json({ message: "Entry Successful" });
