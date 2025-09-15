@@ -1,4 +1,4 @@
-const { z } = require('zod')
+const { z } = require('zod');
 
 const userSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters long"),
@@ -7,7 +7,7 @@ const userSchema = z.object({
 });
 
 const expenseSchema = z.object({
-    id: z.number().optional(), // Optional because it is auto-generated
+    id: z.number().optional(),
     amount: z.number().positive("Amount must be positive"),
     description: z.string().min(1, "Description is required"),
     userId: z.number(),
@@ -16,13 +16,11 @@ const expenseSchema = z.object({
 });
 
 const budgetSchema = z.object({
-    id: z.number().optional(), // Optional because it is auto-generated
+    id: z.number().optional(),
     userId: z.number(),
     amount: z.number().positive("Amount must be positive"),
     month: z.number().int().min(1).max(12, "Month must be between 1 and 12"),
     year: z.number().int().min(2000).max(2100, "Year must be between 2000 and 2100"),
 });
 
-module.exports = {
-    userSchema, expenseSchema, budgetSchema
-}
+module.exports = { userSchema, expenseSchema, budgetSchema };
