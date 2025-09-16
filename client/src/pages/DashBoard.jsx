@@ -12,6 +12,7 @@ import {
   ArcElement,
 } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import SplitwiseCalculator from "./Splitwise";
 
 // Register ChartJS components
 ChartJS.register(
@@ -227,6 +228,10 @@ const Dashboard = () => {
             Track your spending and manage your budget
           </p>
         </div>
+      </div>
+
+      <div className="mt-10">
+        <SplitwiseCalculator/> 
       </div>
 
       {/* Stats Overview */}
